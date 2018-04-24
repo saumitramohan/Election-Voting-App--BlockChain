@@ -13,7 +13,7 @@ contract Election {
 
 	struct Candidate{
 		uint id;
-		String name;
+		string name;
 		uint voteCount;
 
 	}
@@ -34,7 +34,7 @@ contract Election {
 
 	// Local variable - _name , hence _
 	// private as we dont want to be accesible
-	function addCandidate(String _name) private{
+	function addCandidate(string _name) private{
 		// Id of the candidates
 		candidatesCount ++;
 		candidates[candidatesCount] = Candidate(candidatesCount,_name,0);
