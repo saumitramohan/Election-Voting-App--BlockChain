@@ -23,6 +23,9 @@ contract Election {
 		addCandidate ("Candidate 2");
 	}
 
+	// Store accounts that have voted
+
+	mapping(address => bool ) public voters;
 	// Store a Candidate
 
 	mapping (uint => Candidate) public candidates;
@@ -37,6 +40,20 @@ contract Election {
 	function addCandidate(string _name) private{
 		// Id of the candidates
 		candidatesCount ++;
-		candidates[candidatesCount] = Candidate(candidatesCount,_name,0);
+		candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
+	}
+
+	// All the code in the block chain is immutable
+	// Deploying the contract case gas
+	// Bug full code will cause unnecessary ether
+
+	// Vote Count
+	function vote (uint _id) public {
+		// access the account which is voting 
+		require(!voters[msg.sender]);
+
+		require(_id > 0 && _id <= candidatesCount);
+		voters[msg.sender] = true;
+		candidates[_id].voteCount++;
 	}
 }
